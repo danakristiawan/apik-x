@@ -64,7 +64,9 @@ class Ref_user_model extends CI_Model
                 $data = [
                     'nip' => $user['nip'],
                     'nama' => $user['nama'],
-                    'profil' => $this->hris->getProfil($nip)['Data']
+                    'profil' => $this->hris->getProfil($nip)['Data'],
+                    'kdsatker' => $this->hris->getProfil($nip)['Data']['KdSatker'],
+                    'tahun' => date('Y')
                 ];
                 $this->session->set_userdata($data);
                 redirect('beranda');

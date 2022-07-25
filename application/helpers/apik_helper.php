@@ -36,3 +36,12 @@ function sso()
         ]
     ];
 }
+
+function sesi()
+{
+    $ci = get_instance();
+    return [
+        'kdsatker' => $ci->session->userdata('kdsatker'),
+        'tahun' => $ci->session->userdata('tahun')
+    ];
+}

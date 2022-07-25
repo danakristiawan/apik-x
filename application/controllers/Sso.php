@@ -49,7 +49,9 @@ class Sso extends CI_Controller
                         'nip' => $userinfo['nip'],
                         'nik' => $userinfo['g2c_Nik'],
                         'id_token' => $token['id_token'],
-                        'profil' => $this->hris->getProfil($userinfo['nip'])['Data']
+                        'profil' => $this->hris->getProfil($userinfo['nip'])['Data'],
+                        'kdsatker' => $this->hris->getProfil($userinfo['nip'])['Data']['KdSatker'],
+                        'tahun' => date('Y')
                     ];
                     $this->session->set_userdata($newdata);
                     redirect('beranda');

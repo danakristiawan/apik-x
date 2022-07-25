@@ -380,7 +380,7 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_cookie_name'] = 'apik-x_session';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
@@ -462,7 +462,11 @@ $config['csrf_exclude_uris'] = array(
     'api/referensi/user',
     'api/referensi/kategori',
     'api/referensi/menu',
-    'api/referensi/sub'
+    'api/referensi/sub',
+    'api/data/detail',
+    'api/data/nota',
+    'api/data/rekening',
+    'api/data/transaksi'
 );
 
 /*

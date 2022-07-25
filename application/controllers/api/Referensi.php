@@ -13,6 +13,8 @@ class Referensi extends RestController
         $this->load->model('Ref_kategori_model', 'kategori');
         $this->load->model('Ref_menu_model', 'menu');
         $this->load->model('Ref_sub_model', 'sub');
+        $this->load->model('Ref_kelompok_model', 'kelompok');
+        $this->load->model('Ref_jenis_model', 'jenis');
     }
 
 
@@ -390,6 +392,192 @@ class Referensi extends RestController
     public function empty_sub_delete()
     {
         $this->sub->empty();
+        $this->response([
+            'status' => true,
+            'message' => 'Data was successfully deleted'
+        ], 200);
+    }
+
+    // -----------------------------------
+    // kelompok (5)
+    // -----------------------------------
+
+    public function count_kelompok_get()
+    {
+        $data = $this->kelompok->count();
+        $this->response($data, 200);
+    }
+
+    public function kelompok_get()
+    {
+        $id = $this->get('id');
+        $keyword = $this->get('keyword');
+        $limit = $this->get('limit');
+        $offset = $this->get('offset');
+        if ($keyword) {
+            $data = $this->kelompok->find($keyword, $limit, $offset);
+        } else {
+            $data = $this->kelompok->get($id, $limit, $offset);
+        }
+        $this->response($data, 200);
+    }
+
+    public function kelompok_post()
+    {
+        $data = [
+            'kode' => $this->post('kode'),
+            'nama' => $this->post('nama')
+        ];
+        if ($this->post('nama') === null | $this->post('nama') === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were added'
+            ], 404);
+        } else {
+            $this->kelompok->create($data);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully added'
+            ], 200);
+        }
+    }
+
+    public function kelompok_put()
+    {
+        $id = $this->put('id');
+        $data = [
+            'kode' => $this->put('kode'),
+            'nama' => $this->put('nama')
+        ];
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were changed'
+            ], 404);
+        } else {
+            $this->kelompok->update($data, $id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully changed'
+            ], 200);
+        }
+    }
+
+    public function kelompok_delete()
+    {
+        $id = $this->delete('id');
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were deleted'
+            ], 404);
+        } else {
+            $this->kelompok->delete($id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully deleted'
+            ], 200);
+        }
+    }
+
+    public function empty_kelompok_delete()
+    {
+        $this->kelompok->empty();
+        $this->response([
+            'status' => true,
+            'message' => 'Data was successfully deleted'
+        ], 200);
+    }
+
+    // -----------------------------------
+    // jenis (6)
+    // -----------------------------------
+
+    public function count_jenis_get()
+    {
+        $data = $this->jenis->count();
+        $this->response($data, 200);
+    }
+
+    public function jenis_get()
+    {
+        $id = $this->get('id');
+        $keyword = $this->get('keyword');
+        $limit = $this->get('limit');
+        $offset = $this->get('offset');
+        if ($keyword) {
+            $data = $this->jenis->find($keyword, $limit, $offset);
+        } else {
+            $data = $this->jenis->get($id, $limit, $offset);
+        }
+        $this->response($data, 200);
+    }
+
+    public function jenis_post()
+    {
+        $data = [
+            'kode' => $this->post('kode'),
+            'nama' => $this->post('nama'),
+            'kelompok_id' => $this->post('kelompok_id'),
+            'jenis' => $this->post('jenis')
+        ];
+        if ($this->post('nama') === null | $this->post('nama') === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were added'
+            ], 404);
+        } else {
+            $this->jenis->create($data);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully added'
+            ], 200);
+        }
+    }
+
+    public function jenis_put()
+    {
+        $id = $this->put('id');
+        $data = [
+            'kode' => $this->put('kode'),
+            'nama' => $this->put('nama'),
+            'kelompok_id' => $this->put('kelompok_id'),
+            'jenis' => $this->put('jenis')
+        ];
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were changed'
+            ], 404);
+        } else {
+            $this->jenis->update($data, $id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully changed'
+            ], 200);
+        }
+    }
+
+    public function jenis_delete()
+    {
+        $id = $this->delete('id');
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were deleted'
+            ], 404);
+        } else {
+            $this->jenis->delete($id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully deleted'
+            ], 200);
+        }
+    }
+
+    public function empty_jenis_delete()
+    {
+        $this->jenis->empty();
         $this->response([
             'status' => true,
             'message' => 'Data was successfully deleted'

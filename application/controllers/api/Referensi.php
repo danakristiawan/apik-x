@@ -9,12 +9,14 @@ class Referensi extends RestController
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Ref_user_model', 'user');
-        $this->load->model('Ref_kategori_model', 'kategori');
-        $this->load->model('Ref_menu_model', 'menu');
-        $this->load->model('Ref_sub_model', 'sub');
-        $this->load->model('Ref_kelompok_model', 'kelompok');
         $this->load->model('Ref_jenis_model', 'jenis');
+        $this->load->model('Ref_kategori_model', 'kategori');
+        $this->load->model('Ref_kelompok_model', 'kelompok');
+        $this->load->model('Ref_menu_model', 'menu');
+        $this->load->model('Ref_nota_model', 'nota');
+        $this->load->model('Ref_satker_model', 'satker');
+        $this->load->model('Ref_sub_model', 'sub');
+        $this->load->model('Ref_user_model', 'user');
     }
 
 
@@ -578,6 +580,200 @@ class Referensi extends RestController
     public function empty_jenis_delete()
     {
         $this->jenis->empty();
+        $this->response([
+            'status' => true,
+            'message' => 'Data was successfully deleted'
+        ], 200);
+    }
+
+    // -----------------------------------
+    // nota (7)
+    // -----------------------------------
+
+    public function count_nota_get()
+    {
+        $data = $this->nota->count();
+        $this->response($data, 200);
+    }
+
+    public function nota_get()
+    {
+        $id = $this->get('id');
+        $keyword = $this->get('keyword');
+        $limit = $this->get('limit');
+        $offset = $this->get('offset');
+        if ($keyword) {
+            $data = $this->nota->find($keyword, $limit, $offset);
+        } else {
+            $data = $this->nota->get($id, $limit, $offset);
+        }
+        $this->response($data, 200);
+    }
+
+    public function nota_post()
+    {
+        $data = [
+            'kode' => $this->post('kode'),
+            'nama' => $this->post('nama'),
+            'kdk' => $this->post('kdk'),
+            'kdj' => $this->post('kdj'),
+            'jns' => $this->post('jns'),
+            'keg' => $this->post('keg')
+        ];
+        if ($this->post('nama') === null | $this->post('nama') === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were added'
+            ], 404);
+        } else {
+            $this->nota->create($data);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully added'
+            ], 200);
+        }
+    }
+
+    public function nota_put()
+    {
+        $id = $this->put('id');
+        $data = [
+            'kode' => $this->put('kode'),
+            'nama' => $this->put('nama'),
+            'kdk' => $this->put('kdk'),
+            'kdj' => $this->put('kdj'),
+            'jns' => $this->put('jns'),
+            'keg' => $this->put('keg')
+        ];
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were changed'
+            ], 404);
+        } else {
+            $this->nota->update($data, $id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully changed'
+            ], 200);
+        }
+    }
+
+    public function nota_delete()
+    {
+        $id = $this->delete('id');
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were deleted'
+            ], 404);
+        } else {
+            $this->nota->delete($id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully deleted'
+            ], 200);
+        }
+    }
+
+    public function empty_nota_delete()
+    {
+        $this->nota->empty();
+        $this->response([
+            'status' => true,
+            'message' => 'Data was successfully deleted'
+        ], 200);
+    }
+
+    // -----------------------------------
+    // satker (8)
+    // -----------------------------------
+
+    public function count_satker_get()
+    {
+        $data = $this->satker->count();
+        $this->response($data, 200);
+    }
+
+    public function satker_get()
+    {
+        $id = $this->get('id');
+        $keyword = $this->get('keyword');
+        $limit = $this->get('limit');
+        $offset = $this->get('offset');
+        if ($keyword) {
+            $data = $this->satker->find($keyword, $limit, $offset);
+        } else {
+            $data = $this->satker->get($id, $limit, $offset);
+        }
+        $this->response($data, 200);
+    }
+
+    public function satker_post()
+    {
+        $data = [
+            'kode' => $this->post('kode'),
+            'nama' => $this->post('nama'),
+            'urut_transaksi' => $this->post('urut_transaksi'),
+            'urut_nota' => $this->post('urut_nota')
+        ];
+        if ($this->post('nama') === null | $this->post('nama') === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were added'
+            ], 404);
+        } else {
+            $this->satker->create($data);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully added'
+            ], 200);
+        }
+    }
+
+    public function satker_put()
+    {
+        $id = $this->put('id');
+        $data = [
+            'kode' => $this->put('kode'),
+            'nama' => $this->put('nama'),
+            'urut_transaksi' => $this->put('urut_transaksi'),
+            'urut_nota' => $this->put('urut_nota')
+        ];
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were changed'
+            ], 404);
+        } else {
+            $this->satker->update($data, $id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully changed'
+            ], 200);
+        }
+    }
+
+    public function satker_delete()
+    {
+        $id = $this->delete('id');
+        if ($id === null | $id === "") {
+            $this->response([
+                'status' => false,
+                'message' => 'No data were deleted'
+            ], 404);
+        } else {
+            $this->satker->delete($id);
+            $this->response([
+                'status' => true,
+                'message' => 'Data was successfully deleted'
+            ], 200);
+        }
+    }
+
+    public function empty_satker_delete()
+    {
+        $this->satker->empty();
         $this->response([
             'status' => true,
             'message' => 'Data was successfully deleted'

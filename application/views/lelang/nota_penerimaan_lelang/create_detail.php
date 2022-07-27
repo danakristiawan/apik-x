@@ -22,12 +22,12 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6">
-                                <a href="<?= base_url('lelang/nota-pengeluaran-lelang/create'); ?>" class="btn btn-outline-primary ml-2">Tambah</a>
+                                <a href="<?= base_url('lelang/nota-penerimaan-lelang/detail/') . $nota_id; ?>" class="btn btn-outline-primary ml-2">Kembali</a>
                             </div>
                             <div class="col-lg-6">
                                 <?= form_open(); ?>
-                                <div class="input-group mt-1">
-                                    <input type="text" name="urut" class="form-control form-control" placeholder="nomor urut">
+                                <div class="input-group">
+                                    <input type="text" name="uraian" class="form-control form-control" placeholder="uraian">
                                     <button class="btn btn-outline-primary" type="submit">Cari</button>
                                 </div>
                                 </form>
@@ -42,32 +42,30 @@
                                         <tr class="text-center">
                                             <th>No</th>
                                             <th>Kode</th>
-                                            <th>Jumlah</th>
                                             <th>Nominal</th>
+                                            <th>Uraian</th>
                                             <th>Tanggal</th>
+                                            <th>Nomor VA</th>
                                             <th>Ket</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = $page + 1;
-                                        foreach ($nota as $r) : ?>
+                                        foreach ($transaksi as $r) : ?>
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
-                                                <td><?= $r['kdsatker'] . $r['bulan'] . $r['tahun'] . $r['kdn'] . $r['jns'] . $r['urut']; ?></td>
-                                                <td class="text-end"><?= number_format($r['jumlah'], 0, ',', '.'); ?></td>
+                                                <td><?= $r['kdsatker'] . $r['bulan'] . $r['tahun'] . $r['kdk'] . $r['kdj'] . $r['jns'] . $r['urut']; ?></td>
                                                 <td class="text-end"><?= number_format($r['nominal'], 0, ',', '.'); ?></td>
+                                                <td><?= $r['uraian']; ?></td>
                                                 <td><?= date('d-m-Y', $r['tanggal']); ?></td>
+                                                <td><?= $r['va']; ?></td>
                                                 <td><?= $r['ket']; ?></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/detail/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Detail</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/process/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan memproses data ini?');">Proses</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/update/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Ubah</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/delete/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?');">Hapus</a>
+                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/add-detail/') . $nota_id . '/' . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Pilih</a>
                                                     </div>
                                                 </td>
-
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -76,7 +74,7 @@
                         </div>
                     </div>
                     <div class="card-footer pt-3 pb-0">
-                        <?= $urut == null ? $pagination : ''; ?>
+                        <?= $uraian == null ? $pagination : ''; ?>
                     </div>
                 </div>
             </div>

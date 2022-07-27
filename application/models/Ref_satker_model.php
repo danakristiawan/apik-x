@@ -52,4 +52,10 @@ class Ref_satker_model extends CI_Model
     {
         return $this->db->get_where($this->_table, ['kode' => $kode])->row_array();
     }
+
+    public function updateKode($data, $kode = null)
+    {
+        $this->db->update($this->_table, $data, ['kode' => $kode]);
+        return $this->db->affected_rows();
+    }
 }

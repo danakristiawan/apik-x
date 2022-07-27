@@ -11,12 +11,12 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Jenis Nota</label>
-                                        <select class="form-control" name="kode">
-                                            <?php foreach ($refnota as $r) : ?>
-                                                <option value="<?= $r['kode'] . $r['nama']; ?>"><?= $r['nama']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <label>Nominal</label>
+                                        <input type="text" class="form-control <?= form_error('nominal') ? 'is-invalid' : ''; ?>" name="nominal" value="<?= $nota['nominal']; ?>">
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            <?= form_error('nominal'); ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

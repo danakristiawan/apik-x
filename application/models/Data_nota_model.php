@@ -48,23 +48,43 @@ class Data_nota_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function getApp($kdsatker = null, $tahun = null, $limit = 0, $offset = null, $id = null)
+    public function findDetail($kdsatker = null, $tahun = null, $jns = null, $keg = null, $sts = null, $keyword = null, $limit = 0, $offset = null)
+    {
+        $this->db->like('urut', $keyword);
+        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'jns' => $jns, 'keg' => $keg, 'sts' => $sts], $limit, $offset)->result_array();
+    }
+
+    public function countDetail($kdsatker = null, $tahun = null, $jns = null, $keg = null, $sts = null)
+    {
+        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'jns' => $jns, 'keg' => $keg, 'sts' => $sts])->num_rows();
+    }
+
+    public function getDetail($kdsatker = null, $tahun = null, $jns = null, $keg = null, $sts = null, $limit = 0, $offset = null, $id = null)
     {
         if ($id === null) {
-            return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun], $limit, $offset)->result_array();
+            return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'jns' => $jns, 'keg' => $keg, 'sts' => $sts], $limit, $offset)->result_array();
         } else {
             return $this->db->get_where($this->_table, ['id' => $id])->row_array();
         }
     }
 
-    public function findApp($kdsatker = null, $tahun = null, $keyword = null, $limit = 0, $offset = null)
+    public function getApp($kdsatker = null, $tahun = null, $keg = null, $sts = null, $limit = 0, $offset = null, $id = null)
     {
-        $this->db->like('urut', $keyword);
-        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun], $limit, $offset)->result_array();
+        if ($id === null) {
+            return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'keg' => $keg, 'sts' => $sts], $limit, $offset)->result_array();
+        } else {
+            return $this->db->get_where($this->_table, ['id' => $id])->row_array();
+        }
     }
 
-    public function countApp($kdsatker = null, $tahun = null)
+    public function findApp($kdsatker = null, $tahun = null, $keg = null, $sts = null, $keyword = null, $limit = 0, $offset = null)
     {
-        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun])->num_rows();
+        $this->db->like('urut', $keyword);
+        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'keg' => $keg, 'sts' => $sts], $limit, $offset)->result_array();
+    }
+
+    public function countApp($kdsatker = null, $tahun = null, $keg = null, $sts = null)
+    {
+        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'keg' => $keg, 'sts' => $sts])->num_rows();
     }
 }

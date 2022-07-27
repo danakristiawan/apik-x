@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="<?= base_url('lelang/nota-penerimaan-lelang'); ?>" class="btn btn-outline-primary">Batal</a>
+                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang'); ?>" class="btn btn-outline-primary">Batal</a>
                         <button type="submit" class="btn btn-outline-primary">Simpan</button>
                     </div>
 

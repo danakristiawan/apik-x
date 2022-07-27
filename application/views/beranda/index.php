@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Transaksi</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
+                                        <h6 class="font-extrabold mb-0"><?= number_format($count_l + $count_p, 0, ",", "."); ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Nota Penerimaan</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                        <h6 class="font-extrabold mb-0"><?= number_format($count_nota_d_l + $count_nota_d_p, 0, ",", "."); ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Nota Pengeluaran</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
+                                        <h6 class="font-extrabold mb-0"><?= number_format($count_nota_k_l + $count_nota_k_p, 0, ",", "."); ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Pembukuan</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
+                                        <h6 class="font-extrabold mb-0"><?= number_format($count_buku_l + $count_buku_p, 0, ",", "."); ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -180,23 +180,21 @@
             <div class="col-12 col-lg-3">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4>Daftar Rekening</h4>
+                        <h4>Data Rekening</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-small">
                                     <tbody>
-                                        <tr>
-                                            <td>Bank BRI Cabang Kramat</td>
-                                            <td>6141-11-15411-141</td>
+                                        <?php foreach ($rekening as $r) : ?>
+                                            <tr>
+                                                <td><?= $r['nama_bank']; ?></td>
+                                                <td><?= $r['nomor']; ?></td>
+                                                <td><?= $r['ket']; ?></td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Bank BNI Pecenongan</td>
-                                            <td>56833383</td>
-
-                                        </tr>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

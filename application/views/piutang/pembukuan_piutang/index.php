@@ -22,7 +22,6 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6">
-                                <a href="<?= base_url('lelang/nota-pengeluaran-lelang/create'); ?>" class="btn btn-outline-primary ml-2">Tambah</a>
                             </div>
                             <div class="col-lg-6">
                                 <?= form_open(); ?>
@@ -61,10 +60,9 @@
                                                 <td><?= $r['ket']; ?></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/detail/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Detail</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/process/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan memproses data ini?');">Proses</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/update/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Ubah</a>
-                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/delete/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?');">Hapus</a>
+                                                        <a href="<?= base_url('piutang/pembukuan-piutang/detail/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Detail</a>
+                                                        <a href="<?= base_url('piutang/pembukuan-piutang/process/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan memproses data ini?');">Proses</a>
+                                                        <a href="<?= base_url('piutang/pembukuan-piutang/reject/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan menolak data ini?');">Tolak</a>
                                                     </div>
                                                 </td>
 

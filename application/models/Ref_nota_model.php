@@ -1,8 +1,8 @@
 <?php
 
-class Data_detail_model extends CI_Model
+class Ref_nota_model extends CI_Model
 {
-    private $_table = 'data_detail';
+    private $_table = 'ref_nota';
 
     public function get($id = null, $limit = 0, $offset = null)
     {
@@ -15,7 +15,7 @@ class Data_detail_model extends CI_Model
 
     public function find($keyword = null, $limit = 0, $offset = null)
     {
-        $this->db->like('kdsatker', $keyword);
+        $this->db->like('nama', $keyword);
         return $this->db->get($this->_table, $limit, $offset)->result_array();
     }
 
@@ -48,25 +48,13 @@ class Data_detail_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function countNotaId($nota_id = null)
+    public function getKode($kode = null)
     {
-        return $this->db->get_where($this->_table, ['nota_id' => $nota_id])->num_rows();
+        return $this->db->get_where($this->_table, ['kode' => $kode])->row_array();
     }
 
-    public function sumNotaId($nota_id = null)
+    public function getKegJns($keg = null, $jns = null)
     {
-        $query = "SELECT nota_id, sum(nominal) as nominal FROM data_detail where nota_id='$nota_id' group by nota_id";
-        return $this->db->query($query)->row_array();
-    }
-
-    public function findNotaId($urut = null, $nota_id = null, $limit = 0, $offset = null)
-    {
-        $this->db->like('urut', $urut);
-        return $this->db->get_where($this->_table, ['nota_id' => $nota_id], $limit, $offset)->result_array();
-    }
-
-    public function getNotaId($nota_id = null, $limit = 0, $offset = null)
-    {
-        return $this->db->get_where($this->_table, ['nota_id' => $nota_id], $limit, $offset)->result_array();
+        return $this->db->get_where($this->_table, ['keg' => $keg, 'jns' => $jns])->result_array();
     }
 }

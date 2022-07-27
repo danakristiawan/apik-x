@@ -1,6 +1,6 @@
 <?php
 
-class Pengesahan_lelang extends CI_Controller
+class Arsip_piutang extends CI_Controller
 {
     public function __construct()
     {
@@ -12,11 +12,11 @@ class Pengesahan_lelang extends CI_Controller
 
     public function index()
     {
-        $data['header'] = 'Pengesahan Lelang';
+        $data['header'] = 'Arsip Piutang';
 
         // setting halaman
-        $config['base_url'] = base_url('lelang/pengesahan-lelang/index/');
-        $config['total_rows'] = $this->nota->countApp(sesi()['kdsatker'], sesi()['tahun'], 'L', 1);
+        $config['base_url'] = base_url('piutang/arsip-piutang/index/');
+        $config['total_rows'] = $this->nota->countApp(sesi()['kdsatker'], sesi()['tahun'], 'P', 3);
         $config['per_page'] = 10;
         $config["num_links"] = 3;
         $this->pagination->initialize($config);
@@ -30,46 +30,26 @@ class Pengesahan_lelang extends CI_Controller
 
         // pilih tampilan data, semua atau berdasarkan pencarian
         if ($data['urut']) {
-            $data['nota'] = $this->nota->findApp(sesi()['kdsatker'], sesi()['tahun'], 'L', 1, $data['urut'], $limit, $offset);
+            $data['nota'] = $this->nota->findApp(sesi()['kdsatker'], sesi()['tahun'], 'P', 3, $data['urut'], $limit, $offset);
         } else {
-            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 'L', 1, $limit, $offset);
+            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 'P', 3, $limit, $offset);
         }
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar');
-        $this->load->view('lelang/pengesahan_lelang/index', $data);
+        $this->load->view('piutang/arsip_piutang/index', $data);
         $this->load->view('template/footer');
-    }
-
-    public function process($id = null)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->nota->update(['sts' => 2, 'tgl_sah' => time()], $id)) {
-            $this->session->set_flashdata('success', 'Data berhasil diproses.');
-        }
-        redirect('lelang/pengesahan-lelang');
-    }
-
-    public function reject($id = null)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->nota->update(['sts' => 0, 'tgl_kirim' => 0], $id)) {
-            $this->session->set_flashdata('success', 'Data berhasil ditolak.');
-        }
-        redirect('lelang/pengesahan-lelang');
     }
 
     public function detail($nota_id = null)
     {
         if (!isset($nota_id)) show_404();
 
-        $data['header'] = 'Pengesahan Lelang';
+        $data['header'] = 'Arsip Piutang';
         $data['nota_id'] = $nota_id;
 
         // setting halaman
-        $config['base_url'] = base_url('lelang/pengesahan-lelang/detail/' . $nota_id . '/');
+        $config['base_url'] = base_url('piutang/arsip-piutang/detail/' . $nota_id . '/');
         $config['total_rows'] = $this->detail->countNotaId($nota_id);
         $config['per_page'] = 10;
         $config["num_links"] = 3;
@@ -91,7 +71,7 @@ class Pengesahan_lelang extends CI_Controller
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar');
-        $this->load->view('lelang/pengesahan_lelang/detail', $data);
+        $this->load->view('piutang/arsip_piutang/detail', $data);
         $this->load->view('template/footer');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Transaksi_lelang extends CI_Controller
+class Transaksi_piutang extends CI_Controller
 {
     public function __construct()
     {
@@ -11,11 +11,11 @@ class Transaksi_lelang extends CI_Controller
 
     public function index()
     {
-        $data['header'] = 'Transaksi Lelang';
+        $data['header'] = 'Transaksi Piutang';
 
         // setting halaman
-        $config['base_url'] = base_url('lelang/transaksi-lelang/index/');
-        $config['total_rows'] = $this->transaksi->countApp(sesi()['kdsatker'], sesi()['tahun'], 'L');
+        $config['base_url'] = base_url('piutang/transaksi-piutang/index/');
+        $config['total_rows'] = $this->transaksi->countApp(sesi()['kdsatker'], sesi()['tahun'], 'P');
         $config['per_page'] = 10;
         $config["num_links"] = 3;
         $this->pagination->initialize($config);
@@ -29,14 +29,14 @@ class Transaksi_lelang extends CI_Controller
 
         // pilih tampilan data, semua atau berdasarkan pencarian
         if ($data['uraian']) {
-            $data['transaksi'] = $this->transaksi->findApp(sesi()['kdsatker'], sesi()['tahun'], 'L', $data['uraian'], $limit, $offset);
+            $data['transaksi'] = $this->transaksi->findApp(sesi()['kdsatker'], sesi()['tahun'], 'P', $data['uraian'], $limit, $offset);
         } else {
-            $data['transaksi'] = $this->transaksi->getApp(sesi()['kdsatker'], sesi()['tahun'], 'L', $limit, $offset);
+            $data['transaksi'] = $this->transaksi->getApp(sesi()['kdsatker'], sesi()['tahun'], 'P', $limit, $offset);
         }
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar');
-        $this->load->view('lelang/transaksi_lelang/index', $data);
+        $this->load->view('piutang/transaksi_piutang/index', $data);
         $this->load->view('template/footer');
     }
 }

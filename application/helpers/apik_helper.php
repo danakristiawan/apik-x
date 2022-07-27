@@ -45,3 +45,29 @@ function sesi()
         'tahun' => $ci->session->userdata('tahun')
     ];
 }
+
+function urut_nota()
+{
+    $ci = get_instance();
+    $ci->load->model('Ref_satker_model', 'satker');
+    $urut_nota = $ci->satker->getKode(sesi()['kdsatker'])['urut_nota'];
+    $urut_nota_next = intval($urut_nota) + 1;
+    switch (strlen($urut_nota_next)) {
+        case '1':
+            $urut_nota_next = '000' . $urut_nota_next;
+            break;
+        case '2':
+            $urut_nota_next = '00' . $urut_nota_next;
+            break;
+        case '3':
+            $urut_nota_next = '0' . $urut_nota_next;
+            break;
+        default:
+            $urut_nota_next = $urut_nota_next;
+            break;
+    }
+    return [
+        'urut_nota' => $urut_nota,
+        'urut_nota_next' => $urut_nota_next
+    ];
+}

@@ -47,4 +47,9 @@ class Data_rekening_model extends CI_Model
         $this->db->delete($this->_table);
         return $this->db->affected_rows();
     }
+
+    public function getApp($kdsatker = null, $sts = null)
+    {
+        return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'sts' => $sts])->result_array();
+    }
 }

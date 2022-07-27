@@ -27,7 +27,7 @@
                             <div class="col-lg-6">
                                 <?= form_open(); ?>
                                 <div class="input-group mt-1">
-                                    <input type="text" name="uraian" class="form-control form-control" placeholder="uraian">
+                                    <input type="text" name="urut" class="form-control form-control" placeholder="nomor urut">
                                     <button class="btn btn-outline-primary" type="submit">Cari</button>
                                 </div>
                                 </form>
@@ -42,8 +42,11 @@
                                         <tr class="text-center">
                                             <th>No</th>
                                             <th>Kode</th>
+                                            <th>Jumlah</th>
                                             <th>Nominal</th>
                                             <th>Tanggal</th>
+                                            <th>Ket</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,13 +55,16 @@
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
                                                 <td><?= $r['kdsatker'] . $r['bulan'] . $r['tahun'] . $r['kdn'] . $r['jns'] . $r['urut']; ?></td>
+                                                <td class="text-end"><?= number_format($r['jumlah'], 0, ',', '.'); ?></td>
                                                 <td class="text-end"><?= number_format($r['nominal'], 0, ',', '.'); ?></td>
                                                 <td><?= date('d-m-Y', $r['tanggal']); ?></td>
+                                                <td><?= $r['ket']; ?></td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <a href="<?= base_url('lelang/nota-penerimaan-lelang/detail/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Detail</a>
-                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/update/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Ubah</a>
-                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/delete/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?');">Hapus</a>
+                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/process/') . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan memproses data ini?');">Proses</a>
+                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/update/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Ubah</a>
+                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/delete/') . $r['id'] . '/' . $r['jumlah']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?');">Hapus</a>
                                                     </div>
                                                 </td>
 

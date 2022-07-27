@@ -24,10 +24,15 @@ class Beranda extends CI_Controller
         $data['count_nota_k_p'] = $this->nota->countDetail(sesi()['kdsatker'], sesi()['tahun'], 'K', 'P', 1);
         $data['count_buku_l'] = $this->nota->countApp(sesi()['kdsatker'], sesi()['tahun'], 'L', 2);
         $data['count_buku_p'] = $this->nota->countApp(sesi()['kdsatker'], sesi()['tahun'], 'P', 2);
+        $data['grafik_bar'] = $this->transaksi->countBulan(sesi()['kdsatker'], sesi()['tahun']);
+        $data['grafik_pie_l'] = $this->transaksi->countKeg(sesi()['kdsatker'], sesi()['tahun'], 'L');
+        $data['grafik_pie_p'] = $this->transaksi->countKeg(sesi()['kdsatker'], sesi()['tahun'], 'P');
+        $data['transaksi_l'] = $this->transaksi->sum(sesi()['kdsatker'], sesi()['tahun'], 'L');
+        $data['transaksi_p'] = $this->transaksi->sum(sesi()['kdsatker'], sesi()['tahun'], 'P');
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar');
         $this->load->view('beranda/index', $data);
-        $this->load->view('template/footer');
+        $this->load->view('template/footer_grafik', $data);
     }
 }

@@ -22,7 +22,7 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6">
-                                <a href="<?= base_url('lelang/nota-penerimaan-lelang/detail/') . $nota_id; ?>" class="btn btn-outline-primary ml-2">Kembali</a>
+                                <a href="<?= base_url('lelang/nota-pengeluaran-lelang/detail/') . $nota_id; ?>" class="btn btn-outline-primary ml-2">Kembali</a>
                             </div>
                             <div class="col-lg-6">
                                 <?= form_open(); ?>
@@ -63,7 +63,7 @@
                                                 <td><?= $r['ket']; ?></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="<?= base_url('lelang/nota-penerimaan-lelang/add-detail/') . $nota_id . '/' . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Pilih</a>
+                                                        <a href="<?= base_url('lelang/nota-pengeluaran-lelang/add-detail/') . $nota_id . '/' . $r['id']; ?>" class="btn btn-sm btn-outline-primary pt-0 pb-0">Pilih</a>
                                                     </div>
                                                 </td>
                                             </tr>

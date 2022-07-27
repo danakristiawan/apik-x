@@ -83,4 +83,25 @@ class Data_transaksi_model extends CI_Model
         $this->db->like('uraian', $keyword);
         return $this->db->get_where($this->_table, ['kdsatker' => $kdsatker, 'tahun' => $tahun, 'kdk' => $kdk, 'kdj' => $kdj, 'jns' => $jns, 'keg' => $keg, 'sts' => $sts], $limit, $offset)->result_array();
     }
+
+    public function countBulan($kdsatker = null, $tahun = null)
+    {
+        $query = "SELECT a.bulan, b.bulan, count(a.nominal) AS jumlah FROM data_transaksi a LEFT JOIN ref_bulan b ON a.bulan=b.kode WHERE a.kdsatker='$kdsatker' AND a.tahun='$tahun' GROUP BY a.bulan, b.bulan ASC";
+        return $this->db->query($query)->result_array();
+    }
+
+    public function countKeg($kdsatker = null, $tahun = null, $keg = null)
+    {
+        $query = "SELECT keg, count(keg) as jumlah FROM data_transaksi WHERE kdsatker='$kdsatker' AND tahun='$tahun' AND keg='$keg' GROUP BY keg";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function sum($kdsatker = null, $tahun = null, $keg = null)
+    {
+        $query = "SELECT kdk, 
+        SUM(IF(jns = 'D', nominal, 0)) AS debet, 
+        SUM(IF(jns = 'K', nominal, 0)) AS kredit
+        FROM data_transaksi WHERE kdsatker='$kdsatker' AND tahun='$tahun' AND keg='$keg' GROUP BY kdk ORDER BY kdk ASC";
+        return $this->db->query($query)->result_array();
+    }
 }

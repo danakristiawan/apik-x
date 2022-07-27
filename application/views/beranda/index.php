@@ -90,7 +90,7 @@
                     <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header pb-0">
-                                <h5 class="card-title">Pembukuan Lelang</h5>
+                                <h5 class="card-title">Transaksi Lelang</h5>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -105,28 +105,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Dana Pihak Ketiga</td>
-                                                    <td>23.000.000</td>
-                                                    <td>2.000.000</td>
-                                                    <td>22.000.000</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>PPh</td>
-                                                    <td>2.000.000</td>
-                                                    <td>100.000</td>
-                                                    <td>2.200.000</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>PNBP</td>
-                                                    <td>400.000</td>
-                                                    <td>10.000</td>
-                                                    <td>20.000</td>
-
-                                                </tr>
-
+                                                <?php foreach ($transaksi_l as $r) :
+                                                    if ($r['kdk'] == '1') {
+                                                        $nama = 'Dana Pihak Ketiga';
+                                                    } else if ($r['kdk'] == '2') {
+                                                        $nama = 'PNBP';
+                                                    } else {
+                                                        $nama = 'PPh';
+                                                    }
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $nama; ?></td>
+                                                        <td><?= number_format($r['debet'], 0, ',', '.'); ?></td>
+                                                        <td><?= number_format($r['kredit'], 0, ',', '.'); ?></td>
+                                                        <td><?= number_format($r['debet'] - $r['kredit'], 0, ',', '.'); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -137,7 +131,7 @@
                     <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header pb-0">
-                                <h5 class="card-title">Pembukuan Piutang</h5>
+                                <h5 class="card-title">Transaksi Piutang</h5>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -152,21 +146,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Dana Pihak Ketiga</td>
-                                                    <td>23.000.000</td>
-                                                    <td>2.000.000</td>
-                                                    <td>22.000.000</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>PNBP</td>
-                                                    <td>400.000</td>
-                                                    <td>10.000</td>
-                                                    <td>20.000</td>
-
-                                                </tr>
-
+                                                <?php foreach ($transaksi_p as $r) :
+                                                    if ($r['kdk'] == '1') {
+                                                        $nama = 'Dana Pihak Ketiga';
+                                                    } else if ($r['kdk'] == '2') {
+                                                        $nama = 'PNBP';
+                                                    } else {
+                                                        $nama = 'PPh';
+                                                    }
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $nama; ?></td>
+                                                        <td><?= number_format($r['debet'], 0, ',', '.'); ?></td>
+                                                        <td><?= number_format($r['kredit'], 0, ',', '.'); ?></td>
+                                                        <td><?= number_format($r['debet'] - $r['kredit'], 0, ',', '.'); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -203,7 +198,7 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h4>Profil Transaksi</h4>
+                        <h4>Porsi Transaksi</h4>
                     </div>
                     <div class="card-body">
                         <div id="chart-visitors-profile"></div>

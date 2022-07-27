@@ -96,13 +96,18 @@ class Nota_pengeluaran_lelang extends CI_Controller
             redirect('lelang/nota-pengeluaran-lelang');
         } else {
             $data['header'] = 'Nota Pengeluaran Lelang';
-            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 0, null, $id);
+            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 'L', 0, 0, null, $id);
+            $data['refnota'] = $this->refnota->getKegJns('L', 'K');
 
             $validation = $this->form_validation->set_rules($this->rules);
 
             if ($validation->run()) {
+                $kode = htmlspecialchars($this->input->post('kode', true));
+                $kdn = substr($kode, 0, 2);
+                $ket = substr($kode, 2, strlen(trim($kode)) - 2);
                 $data = [
-                    'nominal' =>  htmlspecialchars($this->input->post('nominal', true))
+                    'kdn' => $kdn,
+                    'ket' => $ket
                 ];
                 $this->nota->update($data, $id);
                 $this->session->set_flashdata('success', 'Data berhasil diubah.');

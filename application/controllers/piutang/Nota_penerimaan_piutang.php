@@ -95,13 +95,18 @@ class Nota_penerimaan_piutang extends CI_Controller
             redirect('piutang/nota-penerimaan-piutang');
         } else {
             $data['header'] = 'Nota Penerimaan Piutang';
-            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 0, null, $id);
+            $data['nota'] = $this->nota->getApp(sesi()['kdsatker'], sesi()['tahun'], 'P', 0, 0, null, $id);
+            $data['refnota'] = $this->refnota->getKegJns('P', 'D');
 
             $validation = $this->form_validation->set_rules($this->rules);
 
             if ($validation->run()) {
+                $kode = htmlspecialchars($this->input->post('kode', true));
+                $kdn = substr($kode, 0, 2);
+                $ket = substr($kode, 2, strlen(trim($kode)) - 2);
                 $data = [
-                    'nominal' =>  htmlspecialchars($this->input->post('nominal', true))
+                    'kdn' => $kdn,
+                    'ket' => $ket
                 ];
                 $this->nota->update($data, $id);
                 $this->session->set_flashdata('success', 'Data berhasil diubah.');

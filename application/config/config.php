@@ -459,10 +459,14 @@ $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
-    'api/referensi/user',
+    'api/referensi/jenis',
     'api/referensi/kategori',
+    'api/referensi/kelompok',
     'api/referensi/menu',
+    'api/referensi/nota',
+    'api/referensi/satker',
     'api/referensi/sub',
+    'api/referensi/user',
     'api/data/detail',
     'api/data/nota',
     'api/data/rekening',
